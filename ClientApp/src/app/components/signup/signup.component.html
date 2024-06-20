@@ -1,0 +1,163 @@
+<div class="outer">
+    <div class="container">
+        <div class="row">
+            <div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
+                <div class="panel border bg-white">
+                    <div class="panel-heading">
+                        <h3 class="pt-3 font-weight-bold">Regístrate</h3>
+                    </div>
+                    <div class="panel-body p-3">
+                        <form>
+
+                            <div class="form-group pt-3">
+                                <div class="input-field" [class.error]="nombreCompleto.errors && nombreCompleto.touched">
+                                    <span class="fa-solid fa-user p-2"></span>
+                                    <input 
+                                        formControlName="nombreCompleto"
+                                        type="text"
+                                        (input)="removeErrorClass(nombreCompleto)"
+                                        placeholder="Nombre completo"
+                                        [formControl]="nombreCompleto">
+                                </div>
+                            </div>
+                            <div class="text-danger" [hidden]="nombreCompleto.valid || nombreCompleto.untouched">
+                                <small *ngIf="nombreCompleto.errors?.['required']">*Escribe tu nombre completo</small>
+                            </div>
+
+                            <div class="form-group pt-3">
+                                <div class="input-field" [class.error]="direccion.errors && direccion.touched">
+                                    <span class="fa-solid fa-location-dot p-2"></span>
+                                    <input 
+                                        formControlName="direccion"
+                                        type="text"
+                                        (input)="removeErrorClass(direccion)"
+                                        placeholder="Direccion"
+                                        [formControl]="direccion">
+                                </div>
+                            </div>
+
+                            <div class="text-danger" [hidden]="direccion.valid || direccion.untouched">
+                                <small *ngIf="direccion.errors?.['required']">*Escribe tu nombre completo</small>
+                            </div>
+
+                            <div class="form-group pt-3">
+                                <div class="input-field" [class.error]="fechaNacimiento.errors && fechaNacimiento.touched">
+                                    <span class="fa-solid fa-calendar-days p-2"></span>
+                                    <igx-input-group>
+                                        <label igxLabel>Fecha de nacimiento</label>
+                                        <input type="text" igxInput [igxDateTimeEditor]="'dd/MM/yyyy'"
+                                               [value]="date" 
+                                               [igxTextSelection]="true"
+                                               [formControl]="fechaNacimiento"
+                                               (input)="removeErrorClass(fechaNacimiento)"/>
+                                    </igx-input-group>
+                                </div>
+                            </div>
+                            <div class="text-danger" [hidden]="fechaNacimiento.valid || fechaNacimiento.untouched">
+                                <small *ngIf="fechaNacimiento.errors?.['required']">*Escribe tu fecha de nacimiento</small>
+                                <small *ngIf="fechaNacimiento.errors?.['ageValidator']">*Debes ser mayor de 18 años</small>
+                            </div>
+
+                            <div class="form-group pt-3">
+                                <div class="input-field" [class.error]="telefono.errors && telefono.touched">
+                                    <span class="fa-solid fa-hashtag p-2"></span>
+                                    <input 
+                                        type="text" 
+                                        formControlName="telefono" 
+                                        (input)="removeErrorClass(telefono)"
+                                        placeholder="Número de teléfono" 
+                                        [formControl]="telefono">
+                                </div>
+                            </div>
+                            <div class="text-danger" [hidden]="telefono.valid || telefono.untouched">
+                                <small *ngIf="telefono.errors?.['bolivianPhoneValidator']">*Escribe un número de teléfono válido</small>
+                            </div>
+
+
+                            <div class="form-group pt-3">
+                                <div class="input-field" [class.error]="organizacion.errors && organizacion.touched">
+                                    <span class="fa-solid fa-building p-2"></span>
+                                    <input 
+                                        formControlName="organizacion"
+                                        type="text"
+                                        (input)="removeErrorClass(organizacion)"
+                                        placeholder="Organización"
+                                        [formControl]="organizacion">
+                                </div>
+                            </div>
+                            <div class="text-danger" [hidden]="organizacion.valid || organizacion.untouched">
+                                <small *ngIf="organizacion.errors?.['required']">*Escribe el nombre de tu organización</small>
+                            </div>
+
+                            <div class="form-group pt-3">
+                                <div class="input-field" [class.error]="cargo.errors && cargo.touched">
+                                    <span class="fa-solid fa-user-tie p-2"></span>
+                                    <input 
+                                        formControlName="cargo"
+                                        type="text"
+                                        (input)="removeErrorClass(cargo)"
+                                        placeholder="Cargo"
+                                        [formControl]="cargo">
+                                </div>
+                            </div>
+                            <div class="text-danger" [hidden]="cargo.valid || cargo.untouched">
+                                <small *ngIf="cargo.errors?.['required']">*Escribe tu profesión</small>
+                            </div>
+
+                            <div class="form-group pt-3">
+                                <div class="input-field" [class.error]="email.errors && email.touched">
+                                    <span class="fa-solid fa-at p-2"></span>
+                                    <input 
+                                        type="email" 
+                                        formControlName="email" 
+                                        (input)="removeErrorClass(email)"
+                                        placeholder="E-mail" 
+                                        [formControl]="email">
+                                </div>
+                            </div>
+                            <div class="text-danger" [hidden]="email.valid || email.untouched">
+                                <small *ngIf="email.errors?.['email']">*Escribe un e-mail válido, como example@mail.com</small>
+                                <small *ngIf="email.errors?.['required']">*Escribe tu e-mail</small>
+                            </div>
+
+                            <div class="form-group pt-3">
+                                <div class="input-field" [class.error]="password.errors && password.touched">
+                                    <span class="fa-solid fa-lock p-2"></span>
+                                    <input 
+                                        formControlName="password"
+                                        type="password"
+                                        (input)="removeErrorClass(password)"
+                                        placeholder="Contraseña (al menos 8 caracteres)"
+                                        [formControl]="password">
+                                </div>
+                            </div>
+                            <div class="text-danger" [hidden]="password.valid || password.untouched">
+                                <small *ngIf="password.errors?.['required']">*Escribe tu contraseña</small>
+                                <small *ngIf="password.errors?.['minlength']">*La contraseña tiene al menos 8 caracteres</small>
+                            </div>
+                            
+                            <div class="form-group pt-3">
+                                <div class="input-field" [class.error]="confirmPassword.errors && confirmPassword.touched">
+                                    <span class="fa-solid fa-lock p-2"></span>
+                                    <input 
+                                        formControlName="confirmPassword"
+                                        type="password"
+                                        (input)="removeErrorClass(confirmPassword)"
+                                        placeholder="Confirma tu contraseña"
+                                        [formControl]="confirmPassword">
+                                </div>
+                            </div>
+                            <div class="text-danger" [hidden]="confirmPassword.valid || confirmPassword.untouched">
+                                <small *ngIf="confirmPassword.errors?.['required']">*Escribe tu contraseña</small>
+                                <small *ngIf="confirmPassword.errors?.['mustMatch']">*Las contraseñas no coinciden</small>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block mt-4 w-100">Regístrate</button>
+                            <div class="text-center pt-4 text-muted">¿Ya tienes una cuenta? <a id="forget" routerLink="/login">Inicia sesión.</a></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="outer">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
+
+                <div class="panel border bg-white">
+
+                    <div class="panel-heading">
+                        <h3 class="pt-3 font-weight-bold">Iniciar sesión</h3>
+                    </div>
+
+                    <div class="panel-body p-3">
+                        <form [formGroup]="loginForm">
+                            
+                            <div class="form-group pt-3">
+                                <div class="input-field" [class.error]="email.errors && email.touched"> <!-- loginForm.controls['email'].dirty && loginForm.hasError('required', 'email') -->
+                                    <span class="fa-solid fa-user p-2"></span>
+                                    <input 
+                                        type="email" 
+                                        formControlName="email" 
+                                        (input)="removeErrorClass(email)"
+                                        placeholder="E-mail" 
+                                        [formControl]="email">
+                                </div>
+                            </div> 
+
+                            <div class="text-danger" [hidden]="email.valid || email.untouched">
+                                <small *ngIf="email.errors?.['email']">*Escribe un e-mail válido, como example@mail.com</small>
+                                <small *ngIf="email.errors?.['required']">*Escribe tu e-mail</small>
+                            </div> 
+
+                            <div class="form-group pt-3">
+                                
+                                <div class="input-field" [class.error]="password.errors && password.touched">
+                                    <span class="fa-solid fa-lock p-2"></span>
+                                    <input 
+                                        formControlName="password"
+                                        [type]="type"
+                                        (input)="removeErrorClass(password)"
+                                        placeholder="Contraseña (al menos 8 caracteres)"
+                                        [formControl]="password">
+                                    <span (click)="ocultarMostrarContra()" class="fa {{ojo}}"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="text-danger" [hidden]="password.valid || password.untouched">
+                                <small *ngIf="password.errors?.['required']">*Escribe tu contraseña</small>
+                                <small *ngIf="password.errors?.['minlength']">*La contraseña tiene al menos 8 caracteres</small>
+                            </div>
+
+                            <button (click)="onSubmit()" type="submit" class="btn btn-primary btn-block mt-4 w-100">Iniciar sesión</button>
+
+                            <div class="text-center pt-4 text-muted">¿No tienes una cuenta? <a id="forget" routerLink="/signup">Registrate.</a></div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
