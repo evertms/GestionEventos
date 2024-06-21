@@ -11,8 +11,6 @@ public partial class Evento
 
     public string Descripcion { get; set; } = null!;
 
-    public DateTime Inicio { get; set; }
-
     public DateTime FechaInicio { get; set; }
 
     public DateTime FechaFinalizacion { get; set; }
