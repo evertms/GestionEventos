@@ -1,4 +1,50 @@
-<div class="outer">
+<div class="signup-container">
+    <form [formGroup]="registerForm" (ngSubmit)="registrarUsuario()">
+      <div>
+        <label for="nombre">Nombre</label>
+        <input id="nombre" formControlName="nombre" type="text" />
+      </div>
+      <div>
+        <label for="direccion">Dirección</label>
+        <input id="direccion" formControlName="direccion" type="text" />
+      </div>
+      <div>
+        <label for="fechaNacimiento">Fecha de Nacimiento</label>
+        <input id="fechaNacimiento" formControlName="fechaNacimiento" type="date" />
+      </div>
+      <div>
+        <label for="correo">Correo</label>
+        <input id="correo" formControlName="correo" type="email" />
+      </div>
+      <div>
+        <label for="prefijo">Prefijo</label>
+        <input id="prefijo" formControlName="prefijo" type="text" />
+      </div>
+      <div>
+        <label for="telefono">Teléfono</label>
+        <input id="telefono" formControlName="telefono" type="text" />
+      </div>
+      <div>
+        <label for="organizacion">Organización</label>
+        <input id="organizacion" formControlName="organizacion" type="text" />
+      </div>
+      <div>
+        <label for="cargo">Cargo</label>
+        <input id="cargo" formControlName="cargo" type="text" />
+      </div>
+      <div>
+        <label for="password">Contraseña</label>
+        <input id="password" formControlName="password" type="password" />
+      </div>
+      <div>
+        <label for="confirmPassword">Confirmar Contraseña</label>
+        <input id="confirmPassword" formControlName="confirmPassword" type="password" />
+      </div>
+      <button type="submit">Registrar</button>
+    </form>
+  </div>
+  
+<!--<div class="outer">
     <div class="container">
         <div class="row">
             <div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
@@ -10,146 +56,137 @@
                         <form>
 
                             <div class="form-group pt-3">
-                                <div class="input-field" [class.error]="nombreCompleto.errors && nombreCompleto.touched">
+                                <div class="input-field" [class.error]="registerForm.nombre.errors && registerForm.nombre.touched">
                                     <span class="fa-solid fa-user p-2"></span>
                                     <input 
-                                        formControlName="nombreCompleto"
+                                        class="form-control"
+                                        formControlName="nombre"
                                         type="text"
-                                        (input)="removeErrorClass(nombreCompleto)"
-                                        placeholder="Nombre completo"
-                                        [formControl]="nombreCompleto">
-                                </div>
+                                        placeholder="Nombre completo"/>
+                                </div> {{ registerForm.value | json }}
                             </div>
-                            <div class="text-danger" [hidden]="nombreCompleto.valid || nombreCompleto.untouched">
-                                <small *ngIf="nombreCompleto.errors?.['required']">*Escribe tu nombre completo</small>
+                            <div class="text-danger" [hidden]="registerForm.nombre.valid || registerForm.nombre.untouched">
+                                <small *ngIf="registerForm.nombre.errors?.['required']">*Escribe tu nombre completo</small>
                             </div>
 
                             <div class="form-group pt-3">
-                                <div class="input-field" [class.error]="direccion.errors && direccion.touched">
+                                <div class="input-field" [class.error]="registerForm.direccion.errors && registerForm.direccion.touched">
                                     <span class="fa-solid fa-location-dot p-2"></span>
                                     <input 
+                                        class="form-control"
                                         formControlName="direccion"
                                         type="text"
-                                        (input)="removeErrorClass(direccion)"
-                                        placeholder="Direccion"
-                                        [formControl]="direccion">
+                                        placeholder="Direccion">
                                 </div>
                             </div>
 
-                            <div class="text-danger" [hidden]="direccion.valid || direccion.untouched">
-                                <small *ngIf="direccion.errors?.['required']">*Escribe tu nombre completo</small>
+                            <div class="text-danger" [hidden]="registerForm.direccion.valid || registerForm.direccion.untouched">
+                                <small *ngIf="registerForm.direccion.errors?.['required']">*Escribe tu direccion</small>
                             </div>
 
                             <div class="form-group pt-3">
-                                <div class="input-field" [class.error]="fechaNacimiento.errors && fechaNacimiento.touched">
+                                <div class="input-field" [class.error]="registerForm.fechaNacimiento.errors && registerForm.fechaNacimiento.touched">
                                     <span class="fa-solid fa-calendar-days p-2"></span>
                                     <igx-input-group>
                                         <label igxLabel>Fecha de nacimiento</label>
                                         <input type="text" igxInput [igxDateTimeEditor]="'dd/MM/yyyy'"
-                                               [value]="date" 
+                                               [value]="date"
                                                [igxTextSelection]="true"
-                                               [formControl]="fechaNacimiento"
-                                               (input)="removeErrorClass(fechaNacimiento)"/>
+                                               formControl="fechaNacimiento">
                                     </igx-input-group>
                                 </div>
                             </div>
-                            <div class="text-danger" [hidden]="fechaNacimiento.valid || fechaNacimiento.untouched">
-                                <small *ngIf="fechaNacimiento.errors?.['required']">*Escribe tu fecha de nacimiento</small>
-                                <small *ngIf="fechaNacimiento.errors?.['ageValidator']">*Debes ser mayor de 18 años</small>
+                            <div class="text-danger" [hidden]="registerForm.fechaNacimiento.valid || registerForm.fechaNacimiento.untouched">
+                                <small *ngIf="registerForm.fechaNacimiento.errors?.['required']">*Escribe tu fecha de nacimiento</small>
+                                <small *ngIf="registerForm.fechaNacimiento.errors?.['ageValidator']">*Debes ser mayor de 18 años</small>
                             </div>
 
                             <div class="form-group pt-3">
-                                <div class="input-field" [class.error]="telefono.errors && telefono.touched">
+                                <div class="input-field" [class.error]="registerForm.telefono.errors && registerForm.telefono.touched">
                                     <span class="fa-solid fa-hashtag p-2"></span>
                                     <input 
+                                        class="form-control"
                                         type="text" 
-                                        formControlName="telefono" 
-                                        (input)="removeErrorClass(telefono)"
-                                        placeholder="Número de teléfono" 
-                                        [formControl]="telefono">
+                                        formControlName="telefono"
+                                        placeholder="Número de teléfono">
                                 </div>
                             </div>
-                            <div class="text-danger" [hidden]="telefono.valid || telefono.untouched">
-                                <small *ngIf="telefono.errors?.['bolivianPhoneValidator']">*Escribe un número de teléfono válido</small>
+                            <div class="text-danger" [hidden]="registerForm.telefono.valid || registerForm.telefono.untouched">
+                                <small>*Escribe un número de teléfono válido</small>
                             </div>
 
 
                             <div class="form-group pt-3">
-                                <div class="input-field" [class.error]="organizacion.errors && organizacion.touched">
+                                <div class="input-field" [class.error]="registerForm.organizacion.errors && registerForm.organizacion.touched">
                                     <span class="fa-solid fa-building p-2"></span>
                                     <input 
+                                        class="form-control"
                                         formControlName="organizacion"
                                         type="text"
-                                        (input)="removeErrorClass(organizacion)"
-                                        placeholder="Organización"
-                                        [formControl]="organizacion">
+                                        placeholder="Organización">
                                 </div>
                             </div>
-                            <div class="text-danger" [hidden]="organizacion.valid || organizacion.untouched">
-                                <small *ngIf="organizacion.errors?.['required']">*Escribe el nombre de tu organización</small>
+                            <div class="text-danger" [hidden]="registerForm.organizacion.valid || registerForm.organizacion.untouched">
+                                <small *ngIf="registerForm.organizacion.errors?.['required']">*Escribe el nombre de tu organización</small>
                             </div>
 
                             <div class="form-group pt-3">
-                                <div class="input-field" [class.error]="cargo.errors && cargo.touched">
+                                <div class="input-field" [class.error]="registerForm.cargo.errors && registerForm.cargo.touched">
                                     <span class="fa-solid fa-user-tie p-2"></span>
                                     <input 
+                                        class="form-control"
                                         formControlName="cargo"
                                         type="text"
-                                        (input)="removeErrorClass(cargo)"
-                                        placeholder="Cargo"
-                                        [formControl]="cargo">
+                                        placeholder="Cargo">
                                 </div>
                             </div>
-                            <div class="text-danger" [hidden]="cargo.valid || cargo.untouched">
-                                <small *ngIf="cargo.errors?.['required']">*Escribe tu profesión</small>
+                            <div class="text-danger" [hidden]="registerForm.cargo.valid || registerForm.cargo.untouched">
+                                <small *ngIf="registerForm.cargo.errors?.['required']">*Escribe tu profesión</small>
                             </div>
 
                             <div class="form-group pt-3">
-                                <div class="input-field" [class.error]="email.errors && email.touched">
+                                <div class="input-field" [class.error]="registerForm.email.errors && registerForm.email.touched">
                                     <span class="fa-solid fa-at p-2"></span>
                                     <input 
+                                        class="form-control"
                                         type="email" 
                                         formControlName="email" 
-                                        (input)="removeErrorClass(email)"
-                                        placeholder="E-mail" 
-                                        [formControl]="email">
+                                        placeholder="E-mail">
                                 </div>
                             </div>
-                            <div class="text-danger" [hidden]="email.valid || email.untouched">
-                                <small *ngIf="email.errors?.['email']">*Escribe un e-mail válido, como example@mail.com</small>
-                                <small *ngIf="email.errors?.['required']">*Escribe tu e-mail</small>
+                            <div class="text-danger" [hidden]="registerForm.valid || registerForm.email.untouched">
+                                <small *ngIf="registerForm.email.errors?.['email']">*Escribe un e-mail válido, como example@mail.com</small>
+                                <small *ngIf="registerForm.email.errors?.['required']">*Escribe tu e-mail</small>
                             </div>
 
                             <div class="form-group pt-3">
-                                <div class="input-field" [class.error]="password.errors && password.touched">
+                                <div class="input-field" [class.error]="registerForm.password.errors && registerForm.password.touched">
                                     <span class="fa-solid fa-lock p-2"></span>
                                     <input 
+                                        class="form-control"
                                         formControlName="password"
                                         type="password"
-                                        (input)="removeErrorClass(password)"
-                                        placeholder="Contraseña (al menos 8 caracteres)"
-                                        [formControl]="password">
+                                        placeholder="Contraseña (al menos 8 caracteres)">
                                 </div>
                             </div>
-                            <div class="text-danger" [hidden]="password.valid || password.untouched">
-                                <small *ngIf="password.errors?.['required']">*Escribe tu contraseña</small>
-                                <small *ngIf="password.errors?.['minlength']">*La contraseña tiene al menos 8 caracteres</small>
+                            <div class="text-danger" [hidden]="registerForm.password.valid || registerForm.password.untouched">
+                                <small *ngIf="registerForm.password.errors?.['required']">*Escribe tu contraseña</small>
+                                <small *ngIf="registerForm.password.errors?.['minlength']">*La contraseña tiene al menos 8 caracteres</small>
                             </div>
                             
                             <div class="form-group pt-3">
-                                <div class="input-field" [class.error]="confirmPassword.errors && confirmPassword.touched">
+                                <div class="input-field" [class.error]="registerForm.confirmPassword.errors && registerForm.confirmPassword.touched">
                                     <span class="fa-solid fa-lock p-2"></span>
                                     <input 
+                                        class="form-control"
                                         formControlName="confirmPassword"
                                         type="password"
-                                        (input)="removeErrorClass(confirmPassword)"
-                                        placeholder="Confirma tu contraseña"
-                                        [formControl]="confirmPassword">
+                                        placeholder="Confirma tu contraseña">
                                 </div>
                             </div>
-                            <div class="text-danger" [hidden]="confirmPassword.valid || confirmPassword.untouched">
-                                <small *ngIf="confirmPassword.errors?.['required']">*Escribe tu contraseña</small>
-                                <small *ngIf="confirmPassword.errors?.['mustMatch']">*Las contraseñas no coinciden</small>
+                            <div class="text-danger" [hidden]="registerForm.confirmPassword.valid || registerForm.confirmPassword.untouched">
+                                <small *ngIf="registerForm.confirmPassword.errors?.['required']">*Escribe tu contraseña</small>
+                                <!--<small *ngIf="registerForm.confirmPassword.errors?.['mustMatch']">*Las contraseñas no coinciden</small>
                             </div>
 
                             <button type="submit" class="btn btn-primary btn-block mt-4 w-100">Regístrate</button>
@@ -161,3 +198,4 @@
         </div>
     </div>
 </div>
+-->

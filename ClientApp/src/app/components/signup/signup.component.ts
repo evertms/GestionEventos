@@ -1,7 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
-import { bolivianPhoneValidator, mustMatch, ageValidator } from '../../helpers/validator-util';
-import ValidateForm from '../../helpers/validateForm'
 import { HttpClient } from '@angular/common/http';
 import { Usuario } from 'src/app/models/usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -14,6 +12,50 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
+
+  registerForm!: FormGroup;
+
+  constructor(private http: HttpClient, 
+    private formBuilder: FormBuilder, 
+    @Inject('BASE_URL') private baseUrl: string, 
+    private usuarioService: UsuarioService,
+    private router: Router){
+    
+  }
+
+  ngOnInit(): void{
+    this.registerForm = this.formBuilder.group({
+      nombre: ['', Validators.required],
+      direccion: ['', Validators.required],
+      fechaNacimiento: ['', Validators.required],
+      correo: ['', [Validators.required, Validators.email]],
+      telefono: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
+      organizacion: ['', Validators.required],
+      cargo: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(8)]]
+    })
+  }
+
+  registrarUsuario(){
+    if (!this.registerForm.valid){
+      alert("Campos invalidos")
+    }
+    else if (this.registerForm.value.password != this.registerForm.value.confirmPassword){
+      alert("Contraseñas diferentes")
+    }
+    else {
+      //this.usuarioService.registrarUsuario(this.registerForm).subscribe( resultado =>{
+        //alert("Usuario Registrado")
+        //this.registerForm.reset();
+        //this.router.navigate(['/login']);
+      //}, error => console.log(error));
+    }
+  }
+
+
+}
+/*{
   public date = new Date('dd/mm/yyyy');
   nombreCompleto = new FormControl('', Validators.required);
   direccion = new FormControl('', Validators.required);
@@ -77,16 +119,24 @@ export class SignupComponent {
     controlName.markAsPristine({onlySelf: true});
   }
 
-  /*registrarUsuario(){
+  registrarUsuario(){
     if(!this.signUpForm.valid){
       alert("Campos invalidos")
     }
     else{
-      this.usuarioService.registrarUsuario(this.signUpForm).subscribe( resultado =>{
+      this.usuarioService.registrarUsuario(
+        this.nombreCompleto,
+        this.direccion,
+        this.fechaNacimiento,
+        this.telefono,
+        this.organizacion,
+        this.cargo,
+        this.email,
+        this.password).subscribe( resultado =>{
         alert("Usuario Registrado")
         this.signUpForm.reset();
         this.router.navigate(['/login']);
       }, error => console.log(error));
     }
-  }*/
-}
+  }
+}*/
