@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 
+using System.Collections.Generic;
 namespace GestionEventos.ServicesApp.Models;
 
 public partial class EquipoEvento
