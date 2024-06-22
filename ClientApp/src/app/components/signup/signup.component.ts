@@ -1,10 +1,8 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
+import { Component, Inject } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Usuario } from 'src/app/models/usuario';
-import { UsuarioService } from 'src/app/services/usuario.service';
+import { UsuarioService } from 'src/app/services/UsuarioService';
 import { Router } from '@angular/router';
-//import { SignUpService, Usuario } from 'src/app/services/sign-up.service';
 
 @Component({
   selector: 'app-signup',
@@ -15,13 +13,11 @@ export class SignupComponent {
 
   registerForm!: FormGroup;
 
-  constructor(private http: HttpClient, 
+  constructor(
     private formBuilder: FormBuilder, 
-    @Inject('BASE_URL') private baseUrl: string, 
-    private usuarioService: UsuarioService,
-    private router: Router){
-    
-  }
+    //private usuarioService: UsuarioService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void{
     this.registerForm = this.formBuilder.group({
@@ -45,10 +41,10 @@ export class SignupComponent {
       alert("Contraseñas diferentes")
     }
     else {
-      //this.usuarioService.registrarUsuario(this.registerForm).subscribe( resultado =>{
-        //alert("Usuario Registrado")
-        //this.registerForm.reset();
-        //this.router.navigate(['/login']);
+      //this.usuarioService.registerUsuario(this.registerForm).subscribe( resultado =>{
+        alert("Usuario Registrado")
+        this.registerForm.reset();
+        this.router.navigate(['/login']);
       //}, error => console.log(error));
     }
   }

@@ -27,7 +27,7 @@ public class UsuarioController: ControllerBase
             return NotFound(new {Mensaje = "Usuario no encontrado"});
         }
 
-        return Ok(verificacion.GetUsuario(appDbContext, user.Correo ,user.Password));
+        return Ok(verificacion.GetUsuario(appDbContext, user.Correo, user.Password));
     }
 
 

@@ -9,11 +9,11 @@ export class AuthService {
 
     isLoggedIn(): boolean {
         // Lógica para verificar si el usuario está autenticado
-        return !!localStorage.getItem('token'); // Ejemplo básico usando localStorage
+        return !!localStorage.getItem('token');
     }
 
     login(username: string, password: string){
-        localStorage.setItem('token', 'jwt_token'); // Ejemplo básico de almacenamiento de token
+        localStorage.setItem('token', 'jwt_token');
     }
 
     logout(): void {

@@ -13,7 +13,7 @@ export class UsuarioService{
         this.baseUrl = baseUrl;
     }
 
-    registrarUsuario(registerForm: FormGroup){
+    registerUsuario(registerForm: FormGroup){
         const usuario = {
             nombre: registerForm.value.nombre,
             direccion: registerForm.value.direccion,
@@ -25,7 +25,7 @@ export class UsuarioService{
             password: registerForm.value.password
         }
 
-        return this.http.post<Usuario>(this.baseUrl + 'usuario/registro', usuario)
+        return this.http.post<Usuario>(this.baseUrl + 'usuario/signup', usuario)
     }
 
 }
